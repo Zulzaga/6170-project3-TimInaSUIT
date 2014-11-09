@@ -1,0 +1,48 @@
+<!--
+
+Author: Kapaya Katongo
+
+-->
+
+
+<!--fixed navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class='container'>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Welcome to TIM in a Suit!</a>
+      </div>
+          <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#" id="profile_page">Profile</a></li>
+              <li class="active"><a href="#" id="companies_page">Companies</a></li>
+              <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                  <form class="navbar-form" role="search" onsubmit='searchForCompany(); return false;'>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Navigate To Company" id="company-search">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                      </div>
+                    </div>
+                  </form>
+              </li>
+            </ul>
+          </div>
+    </div>
+</div>
+
+<!--to fill with companies-->
+<div class="container">
+    <div class = "row companies">
+        {{#each message}}
+            <div class='a-company' id={{name}} data-company-id={{_id}}>
+                <h5> <a name={{name}} href="#" class="selected-company"> {{name}}</a></h5>
+                <hr>
+                <p> {{about}} <p>
+                <br>
+            </div>
+        {{/each}}
+    </div>
+</div>

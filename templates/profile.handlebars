@@ -1,0 +1,103 @@
+<!-- 
+    Author: Zulsar Batmunkh
+    Author: Yee Ling Gan
+ -->
+
+<!--fixed navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Welcome to TIM in a Suit!</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#" id="profile_page">Profile</a></li>
+        <li><a href="#" id="companies_page">Companies</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class = "row" class = "main">
+  <!--side panels-->
+  <div class="col-sm-4"> 
+    <div id = "personal_profile"> 
+        <h3>Welcome {{currentUser.username}} :)</h3></div></br>
+    <div>
+      <a href="#" id="myMessages"><h4>My Messages</h4></a>
+    </div>
+    <div>
+      <a href="#" id="myReviews"><h4>My Reviews</h4></a>
+    </div>
+    <div id='beaver'>
+        <img id="timLogoProf" src="image/tim.png" alt="Tim">
+    </div>
+  </div>
+
+  <!--main view-->
+    <div class="col-sm-8"> 
+      {{#if displayReviews}}
+        <div class="container" id="reviewContainer">
+          <h3>My Reviews</h3>
+          <div class = "row" class="myReviews">
+              {{#each reviews}}
+                <div class="panel panel-default">
+                <div class="panel panel-heading" data-company-id={{company._id}}>
+                  <h5> <a name={{company.name}} href="#" class="selected-company"> {{company.name}}</a></h5> 
+                </div>
+                <div class="panel-body">
+                  <div class='review' data-review-id={{_id}} data-company-id={{company._id}}>
+                      <div>Details: {{details}} </div>
+                      <div id="messageContent">Rating: {{rating}} </div></br>
+                      <a href= "#" class="edit-myReview btn btn-primary">Edit</a>
+                      <a href = "#" class="delete-myReview btn btn-primary">Delete</a>
+                      </br>
+                  </div>
+                </div>
+                </div>
+              {{/each}}
+          </div>
+      </div>
+      {{else}}
+        <h3>Received Messages</h3>
+        <div class="container" id="messageContainer">
+          <div class = "row" class="myRecMessages">
+              {{#each messagesReceived}}
+              <div class="panel panel-default">
+                <div class="panel-heading" data-user-id={{from._id}}>
+                    From: <a href = "#" class="profile">{{from.username}}</a>
+                </div>
+                <div class="panel-body">
+                  <div class='message' data-message-id={{_id}}>
+                      <div id="messageContent" style="border-width:1px">{{content}}</div></br> 
+                      <a href = "#" class="delete-message btn btn-primary">Delete</a>
+                  </div>
+                </div>
+              </div>
+              {{/each}}
+          </div>
+        </div>
+          <h3>Sent Messages</h3>
+          <div class="container" id="messageContainer">
+            <div class = "row" class="mySentMessages">
+                {{#each messagesSent}}
+                <div class="panel panel-default">
+                  <div class="panel-heading" data-user-id={{to._id}}>
+                      To: <a href = "#" class="profile">{{to.username}}</a>
+                  </div>
+                  <div class="panel-body">
+                    <div class='message' data-message-id={{_id}}>
+                        <div id="messageContent" style="border-width:1px">{{content}}</div></br> 
+                        <a href = "#" class="delete-message btn btn-primary">Delete</a>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+            </div>
+          </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,58 @@
+<!-- 
+    Author: Zulsar Batmunkh
+    Author: Yee Ling Gan
+ -->
+
+<!--fixed navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Welcome to TIM in a Suit!</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" id="profile_page">Profile</a></li>
+        <li><a href="#" id="companies_page">Companies</a></li>
+        <li><a href="#" id="search_bar">Search Bar</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class = "row" class = "main">
+  <!--side panels-->
+  <div class="col-sm-4"> 
+      <h3>{{user}}</h3></br></br>
+      <form id="new_message_form">  
+          <h5 class ="form-signin-heading">Send Message</h5>
+          <input type="hidden" name="to" value={{user}}></input>
+          <textarea rows="10" name="content" id="new_message" required></textarea>
+          <input type="submit" value="Send" class="btn btn-lg btn-primary btn-block">
+      </form>
+  </div>
+
+  <!--main view-->
+    <div class="col-sm-8"> 
+      <div class="container" id="reviewContainer">
+          <h3>Reviews</h3>
+          <div class = "row" class="myReviews">
+            {{#each reviews}}
+              <div class="panel panel-default">
+              <div class="panel panel-heading" data-company-id={{company._id}}>
+                <h5> <a name={{company.name}} href="#" class="selected-company"> {{company.name}}</a></h5> 
+              </div>
+              <div class="panel-body">
+                <div class='review' data-review-id={{_id}}>
+                    <div>Details: {{details}} </div>
+                    <div id="messageContent">Rating: {{rating}} </div></br>
+                    </br>
+                </div>
+              </div>
+              </div>
+            {{/each}}
+         </div>
+    </div>
+  </div>
+</div>
+

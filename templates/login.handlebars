@@ -1,0 +1,65 @@
+<!-- 
+    Author: Zulsar Batmunkh
+    Author: Yee Ling Gan
+                             -->
+
+
+<!-- Big title here in one row -->
+<div class = "row" id = "main_title">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-8 centered">
+    <h1>WELCOME TO TIM IN A SUIT</h1>
+  </div>
+</div>
+
+<!-- left hand side: blurb; right hand side: login + registration -->
+<div class = "row" class = "main">
+  {{#if error}}
+    <div id="errorLogin" class='alert alert-danger' role='alert'>
+      {{error}}
+    </div>
+  {{/if}}
+
+  {{#if alert}}
+    <div id="activation" class='alert alert-success' role='alert'>
+      {{alert.message}}
+    </div>
+  {{/if}}
+  <div class="col-sm-1"></div>
+  <!--side panels-->
+  <div class="col-sm-5"> 
+    <div id="timLogo">
+      <img src="image/tim.png" alt="Tim">
+    </div>
+    <div id="decription">
+       <p>TIM in a Suit is a website that aims to help MIT students share their interviewing and interning experiences. It's by MIT students for MIT students.</p>
+    </div>
+  </div>
+
+  <!--main view-->
+  <!-- cite: http://getbootstrap.com/examples/signin/ -->
+  <div class="col-sm-1"></div>
+  <div class="col-sm-4"> 
+    <div id = "user_forms">
+      <div id ="login_form">
+        <!-- login forms here -->
+        <!-- TODO: add action for both forms!!! what is the exact url -->
+        <form id="signin_form">  
+          <h3 class ="form-signin-heading">Please sign in</h3>
+          <input type="text" name="username" placeholder="Username" class="form-control" required >
+          <input type="password" name="password" placeholder="Password" class="form-control" required >
+          <input type="submit" value="Login" class="btn btn-lg btn-primary btn-block">
+        </form>
+      </div>
+        <!-- registration forms here -->
+        
+        <form id="registration_form">
+          <h3 class ="form-signin-heading">Registration</h3>
+          <input type="text" name="username" placeholder="Username" class="form-control" required > 
+          <input type="password" name="password" placeholder="Password" class="form-control" required >
+          <input type="email" name="email" placeholder="MIT email address" class="form-control" required >
+          <input type="submit" value="Register" class="btn btn-lg btn-primary btn-block">
+        </form>
+    </div>
+  </div>
+</div>

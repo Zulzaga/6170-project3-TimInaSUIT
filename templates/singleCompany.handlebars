@@ -1,0 +1,103 @@
+<!-- 
+author: Yee Ling Gan 
+Cite: Navigation bar uses bootstrap: http://getbootstrap.com/ 
+-->
+
+<!--fixed navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Welcome to TIM in a Suit!</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" id="profile_page">Profile</a></li>
+        <li><a href="#" id="companies_page">Companies</a></li>
+        <li><a href="#" id="logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class = "row" class = "main" >
+  <!--side panels-->
+  <!-- <div class="col-sm-4 right-line">  -->
+  <div class="col-sm-4 left-nav">
+    <div id = "company_profile" data-spy="affix" data-offset-top="25">
+      <!-- company name and details -->
+      <p><h1>{{company}}</h1></p>
+      <p><b>Rating:</b> {{companyRating}} out of 5</p>
+      <p>{{about}}</p>
+    </div>
+  </div>
+  <!--main view-->
+  <div class="col-sm-8">
+    <!-- to show errors if any -->
+    {{#if error}}
+      <div id="error" class='alert alert-danger' role='alert'>
+        {{message}}
+      </div>
+    {{/if}}
+
+    <!-- to indicate successful postings -->
+    {{#if success}}
+      <div id="successfullyChanged" class='alert alert-success' role='alert'>
+        {{message}}
+      </div>
+    {{/if}}
+
+    <div id = "new_review" class="fixed">
+
+      <!-- If the user already has a review for this company, show the 'edit review' box -->
+      {{#if writtenreview.success}}
+         <form id="new_review_form" data-company-id={{companyId}} data-review-id={{writtenreview.message._id}} data-spy="affix" data-offset-top="0">
+          <h3 class ="form-review-heading">Edit Your Review</h3>
+          <textarea rows="4" name="details" id="new-review-details" required>{{writtenreview.message.details}}</textarea>
+          <input type="text" name="rating" id="new-review-rating" value="{{writtenreview.message.rating}}" class="form-control" required >
+          <input type="submit" value="Edit Post" class="btn btn-lg btn-primary btn-block" id="review-btn">
+        </form>
+
+      <!-- If the user does not have a review for this company, show the 'new review' box -->
+      {{else}}
+        <form id="new_review_form" data-company-name= {{company}} data-company-id={{companyId}} >  
+          <h3 class ="form-review-heading">Post a Review</h3>
+          <textarea rows="4" name="details" id="new-review-details" placeholder="What do you think about {{company}}? What was helpful for you in your preparation?" required></textarea>
+          <input type="text" name="rating" id="new-review-rating" placeholder="Give a rating between 0 and 5" class="form-control" required >
+          <input type="submit" value="Post" class="btn btn-lg btn-primary btn-block" id="review-btn">
+        </form>
+      {{/if}}
+    </div> 
+    <hr>
+    <!-- List of all reviews for the company -->
+    <div id = "reviews" class="overflow">
+      <h3>Reviews about {{company}}</h3>
+      {{#each reviews}}
+        <!-- If it's the currentUser's review, show in green and show the edit and delete buttons -->
+        {{#if_equals ../currentUser user.username}}
+          <div class="review panel panel-success" data-review-id={{_id}} data-company-id={{../../companyId}}>
+            <div class="panel-heading" data-user-id={{user._id}}>
+              <h5>{{user.username}}</h5>
+            </div>
+            <div class="panel-body">
+              <p>Rating: {{rating}}</p>
+              <p>Thoughts: {{details}}</p>
+              <a href="#" class="edit-review btn btn-primary btn-sm inline">Edit</a>
+              <a href="#" class="delete-review btn btn-primary btn-sm inline">Delete</a>
+            </div>
+          </div>
+        <!-- other users' review, show in blue, do not show edit or delete button -->
+        {{else}}
+          <div class="review panel panel-info" data-review-id={{_id}} data-company-id={{../../companyId}} >
+            <div class="panel-heading" data-user-id={{user._id}}>
+              <a href="#" class="profile" >{{user.username}}</a>
+            </div>
+            <div class="panel-body">
+              <p>Rating: {{rating}}</p>
+              <p>Thoughts: {{details}}</p>
+            </div>
+          </div>
+        {{/if_equals}}
+      {{/each}}
+    </div>
+  </div>
+</div>
